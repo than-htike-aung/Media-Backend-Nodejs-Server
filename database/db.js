@@ -26,13 +26,31 @@ let ProductScheme = new Schema({
     since:{type:Date, require:true}
 })
 
+let UserScheme = new Schema({
+    name: {type:String, require:true},
+    email: {type:String, require:true},
+    password:{type:String, require:true},
+    since:{type:Date, require:true},
+})
+
+let GalleryScheme = new Schema({
+    name: {type:String, require:true}
+})
+
+GalleryScheme.plugin(autoincrement.plugin, 'gallery');
+let Gallery = mongoose.model('gallery', GalleryScheme);
+
 let Cat = mongoose.model('category', CatScheme);
 
 ProductScheme.plugin(autoincrement.plugin,'product');
 ProductScheme.plugin(mongoosePaginate);
 let Product = mongoose.model('product', ProductScheme);
 
+let User = mongoose.model('user', UserScheme);
+
 module.exports = {
     Cat,
-    Product
+    Product,
+    User,
+    Gallery
 }
