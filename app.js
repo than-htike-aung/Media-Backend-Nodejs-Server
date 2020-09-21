@@ -8,6 +8,7 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     User = require('./database/user'),
     path = require('path'),
+    cors = require('cors'),
     JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
     
@@ -42,6 +43,7 @@ app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/",guestRoute);
 passport.use(myStrategy)
+app.use(cors());
 
     
     app.listen(process.env.PORT, ()=>{

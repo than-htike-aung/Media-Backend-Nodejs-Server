@@ -49,11 +49,20 @@ let paginate = (start, count) =>{
     })
 }
 
+let findProductById = (id) =>{
+    return new Promise((resolve,reject)=>{
+        Product.find({"cat_id":id}, (err, result)=>{
+            if(err) reject(err);
+            resolve(result);
+        } )
+    })
+}
 
 
 module.exports = {
     save,
     all,
     destroy,
-    paginate
+    paginate,
+    findProductById
 }
