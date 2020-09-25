@@ -11,7 +11,31 @@ let express = require('express'),
     cors = require('cors'),
     JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
-    
+
+const db = require('./database/db');
+let seeder = require('./database/seeder');
+let Order = require('./database/order');
+
+//seeder.seedCat();
+//seeder.seedProduct();
+
+//for drop Collection
+// db.dropColle('categories')
+//     .then(res=>console.log(res))
+//     .catch(err=>console.log(err))
+
+// let orderObj = {
+//     'uid' :1,
+//     'ords': JSON.stringify({97:2, 102:2,670:3,770:2})
+// }
+// Order.save(orderObj)
+// .then(res=>console.log(res))
+// .catch(err=>console.log(err));
+
+// Order.findOrderById(2)
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err));
+
 let jwtOptions = {};
 
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -43,7 +67,14 @@ app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/",guestRoute);
 passport.use(myStrategy)
-app.use(cors());
+
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus:200
+}
+
+
+app.use(cors(corsOptions));
 
     
     app.listen(process.env.PORT, ()=>{

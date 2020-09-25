@@ -39,6 +39,8 @@ let findByEmail = (email) =>{
     })
 }
 
+
+
 module.exports ={
     save,
    all,

@@ -7,7 +7,7 @@ let Cat = require('../database/cat')
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './assets/uploads')
+      cb(null, './assets/uploads/')
     },
     filename: function (req, file, cb) {
       cb(null,Date.now() + "_" + file.originalname);

@@ -10,6 +10,18 @@ const mongoosePaginate = require('mongoose-paginate');
 
 let Schema = mongoose.Schema;
 
+
+let dropColle = (colle) =>{
+    let db = mongoose.connection;
+
+    return new Promise((resolve, reject)=>{
+        db.dropCollection(colle,(err,result)=>{
+            if(err) reject(err);
+            resolve(colle + "removed!");
+        })
+    })
+}
+
 let CatScheme = new Schema({
     id : {type:Number, require:true},
     name: {type:String, require:true},
@@ -33,6 +45,12 @@ let UserScheme = new Schema({
     since:{type:Date, require:true},
 })
 
+let OrderScheme = new Schema({
+    uid:{type:Number, required:true},
+    ords:{type:String, required:true},
+    since:{type:Date, required:true}
+})
+
 let GalleryScheme = new Schema({
     name: {type:String, require:true}
 })
@@ -46,11 +64,16 @@ ProductScheme.plugin(autoincrement.plugin,'product');
 ProductScheme.plugin(mongoosePaginate);
 let Product = mongoose.model('product', ProductScheme);
 
+OrderScheme.plugin(autoincrement.plugin, 'order');
+let Order = mongoose.model('order', OrderScheme);
+
 let User = mongoose.model('user', UserScheme);
 
 module.exports = {
     Cat,
     Product,
     User,
-    Gallery
+    Gallery,
+    dropColle,
+    Order
 }

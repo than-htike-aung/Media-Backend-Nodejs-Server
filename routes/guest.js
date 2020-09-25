@@ -15,9 +15,16 @@ module.exports = (express)=>{
 
     router.get('/cat/:id', (req,res)=>{
       let id = req.param("id");
-      Product.findProductById(id)
+      Product.findProductByCatId(id)
       .then(result=>res.json({con:true,msg:result}))
       .catch(err=>res.json({con:false, msg:err}))
+    })
+
+    router.get('/product/:id', (req,res)=>{
+      let id = req.param("id");
+      Product.findProuctById(id)
+        .then(result=>res.json({con:true, msg:result}))
+        .catch(err=>res.json({con:false, msg:err}));
     })
 
     router.get('/galleries', (req,res)=>{

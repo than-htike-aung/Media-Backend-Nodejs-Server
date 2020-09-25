@@ -48,5 +48,10 @@ module.exports = (express, jwt)=>{
        
     })
 
+    router.post('/order', (req, res) =>{
+        res.json({'uid': req.body.uid, 'ords': req.body.ords})
+
+    })
+
     return router;
 }
